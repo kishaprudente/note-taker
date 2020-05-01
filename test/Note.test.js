@@ -1,3 +1,5 @@
+const Note = require("../lib/Note");
+
 describe("Note", () => {
   describe("Initialization", () => {
     test("should create an object with a 'tite' property set to the 'tite' argument provided when called with the 'new' keyword", () => {
