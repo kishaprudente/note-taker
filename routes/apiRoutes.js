@@ -1,16 +1,31 @@
-const path = require("path");
 const router = require("express").Router();
 const DbFunction = require("../db/dbFunctions");
 
 const dbFunc = new DbFunction();
-const { readNotes, addNotes, getNotes, addNote } = dbFunc;
 
-router.get("/api/notes", (req, res) => {
-  res.getNotes();
+router.get("/notes", async (req, res) => {
+  try {
+    const notes = await dbFunc.getNotes();
+    res.json(notes);
+  } catch (err) {
+    throw err;
+  }
 });
 
-router.post("/api/notes", (req, res) => {});
+router.post("/notes", async (req, res) => {
+  try {
+    const newNote = req.body;
+    console.log("NEW NOTE", newNote);
 
-router.delete("/api/notes", (req, res) => {});
+    await dbFunc.addNote(newNote);
+    res.json(newNote);
+  } catch (err) {
+    throw err;
+  }
+});
+
+router.delete("/notes/:id", (req, res) => {
+  res.json(dbFunc.deleteNote(req.params.id));
+});
 
 module.exports = router;
