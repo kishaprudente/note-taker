@@ -15,8 +15,6 @@ router.get("/notes", async (req, res) => {
 router.post("/notes", async (req, res) => {
   try {
     const newNote = req.body;
-    console.log("NEW NOTE", newNote);
-
     await dbFunc.addNote(newNote);
     res.json(newNote);
   } catch (err) {

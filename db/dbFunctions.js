@@ -9,7 +9,6 @@ class DbFunctions {
   async getNotes() {
     try {
       const notes = await readFileAsync("db/db.json", "utf8");
-      console.log("STORED NOTES", notes);
       return JSON.parse(notes);
     } catch (err) {
       throw err;
@@ -30,7 +29,6 @@ class DbFunctions {
 
   async addNote(note) {
     try {
-      console.log(note);
       const notes = await this.getNotes();
       const { title, text } = note;
       if (!title || !text) {
